@@ -51,5 +51,7 @@ export const updateTrip = async (req , res) => {
         .eq('id', trip.vehicle_id)
         .single();
 
+        const cost = trip.distannce_km * vehicle.rate_per_km;
+
     const {data, error} = await supabase
 }
