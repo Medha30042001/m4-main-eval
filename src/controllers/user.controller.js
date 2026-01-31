@@ -8,7 +8,7 @@ export const signup = async (req , res) => {
     }
 
     const {data, error} = await supabase
-        .from('users')
+        .from('userss')
         .insert([{name, email, password, role}]);
 
         if(error){

@@ -51,7 +51,20 @@ export const updateTrip = async (req , res) => {
         .eq('id', trip.vehicle_id)
         .single();
 
-        const cost = trip.distannce_km * vehicle.rate_per_km;
+    const cost = trip.distannce_km * vehicle.rate_per_km;
 
     const {data, error} = await supabase
+        .from('trips').update({
+            isCompleted : true,
+            tripCost : cost
+        }).eq('id', tripId);
+
+        await supabase.from('vehicles').update({
+            isAvailable : true
+        }).eq('id', trip.vehicle_id);
+
+    res.status(200).json({
+        message : 'Trip is completed',
+        const : data
+    })
 }
