@@ -1,0 +1,17 @@
+CREATE TABLE customers (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  full_name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  phone TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+CREATE TABLE orderss (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  product_name TEXT NOT NULL,
+  quantity INTEGER NOT NULL,
+  price NUMERIC NOT NULL,
+  order_status TEXT DEFAULT 'pending',
+  customer_id UUID REFERENCES customers(id) ON DELETE CASCADE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
